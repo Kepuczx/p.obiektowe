@@ -1,0 +1,120 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class HelloWorld {
+    public static void main(String[] args) {
+        //zad1
+        System.out.println("Dominik Lachowicz");
+        
+        //zad2
+        String javaString = "Dominik Lachowicz"; 
+        int stringSize= javaString.length();
+        System.out.println(stringSize - 1);
+        
+        //zad3
+        String pierwsze = "Ala, ";
+        String drugie = "ma, ";
+        String trzecie = "kota";
+        System.out.println(pierwsze + drugie + trzecie);  
+
+        
+        //zad4a
+        System.out.println("                    *");
+        System.out.println("                    * *");
+        System.out.println("                    * * *");
+        System.out.println("* * * * * * * * * * * * * *");
+        System.out.println("* * * * * * * * * * * * * * *");
+        System.out.println("* * * * * * * * * * * * * *");
+        System.out.println("                    * * *");
+        System.out.println("                    * *");
+        System.out.println("                    *");
+        
+        //zad4b
+        System.out.println("          *");
+        System.out.println("         * *");
+        System.out.println("        * * *");
+        System.out.println("       * * * *");
+        System.out.println("      * * * * *");
+        System.out.println("     * * * * * *");
+        System.out.println("      * * * * *");
+        System.out.println("       * * * *");
+        System.out.println("        * * *");
+        System.out.println("         * *");
+        System.out.println("          *");
+        
+        
+        //zad5
+        
+        String zdanie = "Ala ma kota";
+        
+        System.out.println(zdanie.replace('a', 'e'));
+        
+        //zad6
+        System.out.println(zdanie.toUpperCase());
+        System.out.println(zdanie.toLowerCase());
+        
+        //zad7
+        char[] charArray = {'A', '!', '@', '>', '~', '\n', '\b'};
+        for(int i=0; i<7; i++){
+            int ascii = charArray[i];
+            System.out.println(ascii);
+        }
+        
+        //zad8 
+        char male1 = 'a';
+        char male2 = 'z';
+        int a = male1;
+        int b = male2;
+        char duze1 = 'A';
+        char duze2 = 'Z';
+        int A = duze1;
+        int Z = duze2;
+        char litera1 = '0';
+        char litera2 = '9';
+        int zero = litera1;
+        int dzie = litera2;
+        System.out.println("Male litery: "+ a +"-"+ b +", wielkie litery: "
+        + A +"-"+ Z +", cyfry: "+ zero +"-"+dzie);
+        
+        //zad9
+        String myStr = "Grzesiek nie wiedzial dlaczego %s jest tak drapieznym %s mimo, ze jego %s na to nie wskazuje.";
+        String result = String.format(myStr, "tygrys", "tygrysem", "tygrys");
+        System.out.println(result);
+        
+        //zad10
+        String ksiazka = "%s to najlepsza ksiazka napisana przez %s";
+        result = String.format(ksiazka, "Meinkampf", "Adolfa Hitlera.");
+        System.out.println(result);
+        
+        //zad11
+        for(int i=0; i<5;i++){
+            System.out.print("wodrze");
+        }
+        System.out.println("");
+        
+        //zad13
+        int[] tab = {54, 103, 241, 67, 9999, 16, 174694};
+        
+        for(int i=0;i<7;i++){
+            char ch = (char) tab[i];
+            System.out.println(ch);
+        }
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+}
