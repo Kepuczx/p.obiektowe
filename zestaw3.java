@@ -47,32 +47,36 @@ public class zestaw3 {
     }
     //zad6
     public static void piramida(int n, int variant){
-        if(variant == 1){
-            if(n == 0){
+        if(variant == 1) {
+            if (n == 1) {
+                System.out.println("*");
+            } else if (n == 0) {
                 System.out.println("Blad");
-            }
-            else{
-                if(n == 1) {
-                    String piramida = "*";
-                }
-                else{
-                    String piramida = "*";
-                    String piramida2 = "  *";
-                    System.out.println(piramida);
-                    System.out.println(piramida2);
-                    int a = 1;
-                    while(a <= n/2-1) {
-                        piramida = piramida + "  *";
-                        piramida2 = piramida2 + "  *";
-                        System.out.println(piramida);
-                        System.out.println(piramida2);
-                        a++;
+            } else {
+                String piramide = "";
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < i; j++) {
+                        piramide += "*";
+                        System.out.println(piramide);
                     }
-                    
                 }
             }
         }
-
+        else if(variant == 2){
+            String piramide = "";
+            int halfN = n/2;
+            for (int i = 0; i <= n - 1; i++) {
+                for (int j = 0; j < n - i; j++) {
+                    piramide += " ";
+                }
+                for (int j = 0; j < (2*i+1); j++) {
+                    piramide += "*";
+                }
+                System.out.println(piramide);
+                piramide="";
+            }
+        }
+        else System.out.println("Blad");
     }
 
 
@@ -81,8 +85,8 @@ public class zestaw3 {
     public static void main(String[] args) {
         //trojkiPitagorejskie(10);
         //liczbyPierwsze(20);
-        //liczbyPodzielne(4, 2);
-        piramida(3, 1);
+        //liczbyPodzielne(3, 2);
+        piramida(5, 2);
 
     }
 }
