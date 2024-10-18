@@ -192,6 +192,70 @@ public class zestaw3 {
         System.out.println(wynik);
     }
 
+    //zad11
+    public static void ciagFibonacciego(int n){
+        if(n<3){
+            System.out.println(1);
+        }
+        else{
+            int[] tab = new int[n];
+            tab[0] = 1;
+            tab[1] = 1;
+            for(int i = 2; i<n; i++){
+                tab[i] = tab[i-1] + tab[i-2];
+            }
+            System.out.println(tab[n-1]);
+        }
+    }
+
+    //zad12
+    public static void sumaNaturalnych(int n){
+        long suma = 0;
+        for(int i = 0; i <= n; i++){
+            suma += i;
+        }
+        System.out.println(suma);
+    }
+    public static void sumaParzystych(int n){
+        long suma = 0;
+        for (int i = 0; i <= n; i += 2) {
+            suma += i;
+        }
+        System.out.println(suma);
+    }
+    public static void sumaNieparzystych(int n){
+        long suma = 0;
+        for (int i = 1; i <= n; i += 2) {
+            suma += i;
+        }
+        System.out.println(suma);
+    }
+    public static void sumaKwaNaturalnych(int n){
+        long suma = 0;
+        for(int i = 0; i<=n; i++){
+            if(Math.sqrt(i) % 1 == 0){
+                suma+=i;
+            }
+        }
+        System.out.println(suma);
+    }
+    public static void sumaSzeNaturalnych(int n){
+        long suma = 0;
+        float sqrt = (1/3);
+        for(int i = 0; i<=n; i++){
+            if(Math.pow(i, 1.0/3.0) % 1 == 0){
+                suma+=i;
+            }
+        }
+        System.out.println(suma);
+    }
+    public static void sumaOdwNaturalnych(int n){
+        float suma = 0;
+        for(float i = 1; i<=n; i++){
+            suma+=(1/i);
+        }
+        System.out.println(suma);
+    }
 
 
     public static void main(String[] args) {
@@ -205,5 +269,11 @@ public class zestaw3 {
         //silniaPodwojna(6);
         //silnia(5, 1);
         //dwumianNewtona(8, 3);
+        //sumaNaturalnych(10);
+        //sumaParzystych(7);
+        //sumaKwaNaturalnych(16);
+        //sumaSzeNaturalnych(27);
+        //sumaOdwNaturalnych(4);
+        ciagFibonacciego(11);
     }
 }
