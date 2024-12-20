@@ -1,20 +1,29 @@
 import java.util.Objects;
 
-public class Platnosc implements IPlatnosc{
+public class Platnosc {
     private double kwota;
     private String statusPlatnosci;
-
-    Platnosc(double kwota)
-    {
+    public Platnosc(double kwota) {
         this.kwota = kwota;
         this.statusPlatnosci = "Nieopłacone";
     }
 
+    public String getStatusPlatnosci() {
+        return statusPlatnosci;
+    }
+
+    public void zaplac(){
+        if(!statusPlatnosci.equals("Opłacone")){
+            this.statusPlatnosci = "Opłacone";
+
+        }else{
+            System.out.println("Platnosc zostala juz wczesniej oplacona.");
+        }
+    }
+
     @Override
-    public void zaplac()
-    {
-        statusPlatnosci = "Opłacone";
-        kwota = 0;
+    public int hashCode(){
+        return Objects.hash(kwota, statusPlatnosci);
     }
 
     @Override
@@ -22,31 +31,7 @@ public class Platnosc implements IPlatnosc{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Platnosc platnosc = (Platnosc) o;
-        return Double.compare(kwota, platnosc.kwota) == 0 && Objects.equals(statusPlatnosci, platnosc.statusPlatnosci);
+        return Double.compare(platnosc.kwota, kwota) == 0 && Objects.equals(statusPlatnosci, platnosc.statusPlatnosci);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(kwota, statusPlatnosci);
-    }
-
-    public double getKwota() {
-        return kwota;
-    }
-
-    public void setKwota(double kwota) {
-        if(kwota < 0.0)
-            throw new IllegalArgumentException();
-        this.kwota = kwota;
-    }
-
-    public String getStatusPlatnosci() {
-        return statusPlatnosci;
-    }
-
-    public void setStatusPlatnosci(String statusPlatnosci) {
-        if(statusPlatnosci == null || statusPlatnosci.trim().isEmpty())
-            throw new IllegalArgumentException();
-        this.statusPlatnosci = statusPlatnosci;
-    }
 }

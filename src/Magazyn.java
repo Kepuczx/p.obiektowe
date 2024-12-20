@@ -1,28 +1,22 @@
 import java.util.HashMap;
-import java.util.stream.Collectors;
+import java.util.Map;
 
-public class Magazyn implements IMagazyn {
-    private HashMap<Produkt, Integer> produkty;
+public class Magazyn {
+    private Map<String, Produkt> produkty;
 
-    public Magazyn()
-    {
-        produkty = new HashMap<>();
+    public Magazyn(){
+        this.produkty = new HashMap<>();
+    }
+    public void wyswietlAsortyment(){
+        if(produkty.isEmpty()){
+            System.out.println("Magazyn nie posiada asortymentu.");
+        }else{
+            System.out.println("Asortyment magazynu: ");
+            for(String nazwa : produkty.keySet()){
+                System.out.println("- "+nazwa);
+            }
+        }
     }
 
-    @Override
-    public String toString() {
-        return produkty.keySet().stream()
-                .map(integer -> integer.getNazwa() + " : " + integer.getIloscNaMagazynie())
-                .collect(Collectors.joining("\n"));
-    }
 
-    public HashMap<Produkt, Integer> getProdukty() {
-        return produkty;
-    }
-
-    public void setProdukty(HashMap<Produkt, Integer> produkty) {
-        if(produkty == null)
-            throw new IllegalArgumentException();
-        this.produkty = produkty;
-    }
 }

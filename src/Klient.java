@@ -1,71 +1,51 @@
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-public class Klient extends Osoba implements IKlient{
-    private String imie;
-    private String nazwisko;
+public class Klient extends Osoba {
+
     private ArrayList<Zamowienie> listaZamowien;
     private Adres adres;
-
-    public Klient(String imie, String nazwisko, Adres adres)
-    {
+    public Klient(String imie, String nazwisko, Adres adres) {
         super(imie, nazwisko);
         this.listaZamowien = new ArrayList<>();
         this.adres = adres;
     }
 
-    @Override
-    public void dodajZamowienie(Zamowienie z)
-    {
-        listaZamowien.add(z);
+
+    public ArrayList<Zamowienie> getListaZamowien() {
+        return listaZamowien;
+    }
+
+    public void dodajZamowienie(Zamowienie zamowienie){
+        listaZamowien.add(zamowienie);
+    }
+    public void wyswietlHistorieZamowien(){
+        System.out.println(getImie()+" "+getNazwisko());
+        double koszt = 0;
+        for(Zamowienie z : listaZamowien) {
+            z.wyswietlZamowienie();
+        }
+        System.out.println("Suma: "+obliczLacznyKosztZamowien());
+    }
+    public double obliczLacznyKosztZamowien(){
+        double koszt = 0;
+        for(Zamowienie z : listaZamowien) {
+            koszt += z.kosztZamowienia();
+        }
+        return koszt;
     }
 
     @Override
-    public String toString() {
-        return listaZamowien.toString();
+    public int hashCode() {
+        return Objects.hash(getImie(), getNazwisko(),adres);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if(!super.equals(o)) return false;
         Klient klient = (Klient) o;
-        return Objects.equals(imie, klient.imie) && Objects.equals(nazwisko, klient.nazwisko) && Objects.equals(adres, klient.adres);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(imie, nazwisko, adres);
-    }
-
-    @Override
-    public double obliczLacznyKosztZamowien()
-    {
-        double wartosc = 0;
-        for(Zamowienie z : listaZamowien){
-            wartosc += z.getKoszykZakupowy().obliczCalkowitaWartosc();
-        }
-        return wartosc;
-    }
-
-    public ArrayList<Zamowienie> getListaZamowien() {
-        return listaZamowien;
-    }
-
-    public void setListaZamowien(ArrayList<Zamowienie> listaZamowien) {
-        if(listaZamowien == null)
-            throw new IllegalArgumentException();
-        this.listaZamowien = listaZamowien;
-    }
-
-    public Adres getAdres() {
-        return adres;
-    }
-
-    public void setAdres(Adres adres) {
-        if(adres == null)
-            throw new IllegalArgumentException();
-        this.adres = adres;
+        return Objects.equals(adres, klient.adres);
     }
 }

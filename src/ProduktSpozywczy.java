@@ -1,5 +1,5 @@
-public class ProduktSpozywczy extends Produkt {
-    ProduktSpozywczy(String nazwa, double cena, int iloscNaMagazynie) {
+public class ProduktSpozywczy extends Produkt{
+    public ProduktSpozywczy(String nazwa, double cena, int iloscNaMagazynie) {
         super(nazwa, cena, iloscNaMagazynie);
     }
 }

@@ -1,57 +1,17 @@
+import java.util.HashMap;
 import java.util.Objects;
 
-public class Produkt implements IProdukt{
+
+public class Produkt {
     private String nazwa;
     private double cena;
     private int iloscNaMagazynie;
 
-    Produkt(String nazwa, double cena, int iloscNaMagazynie)
-    {
-        this.nazwa = nazwa;
-        this.cena = cena;
-        this.iloscNaMagazynie = iloscNaMagazynie;
-    }
+    public Produkt(String nazwa, double cena, int iloscNaMagazynie) {
+        this.nazwa=nazwa;
+        this.cena=cena;
+        this.iloscNaMagazynie=iloscNaMagazynie;
 
-    /*
-    @Override
-    public String getClass()
-    {
-        return "Cześć jestem klasą "+this.getClass();
-    }
-    */
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Produkt produkt = (Produkt) o;
-        return Double.compare(cena, produkt.cena) == 0 && Objects.equals(nazwa, produkt.nazwa);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nazwa, cena);
-    }
-
-    @Override
-    public String toString()
-    {
-        return "nazwa: "+ nazwa +"\n" + "cena: "+ cena+"\n" + "ilosc na magazynie: "+iloscNaMagazynie;
-    }
-
-    @Override
-    public void dodajDoMagazynu(int ilosc)
-    {
-        iloscNaMagazynie += ilosc;
-    }
-
-    public void usunZMagazynu(int ilosc)
-    {
-        if(iloscNaMagazynie >= ilosc)
-        {
-            iloscNaMagazynie -= ilosc;
-        }
     }
 
     public String getNazwa() {
@@ -59,8 +19,6 @@ public class Produkt implements IProdukt{
     }
 
     public void setNazwa(String nazwa) {
-        if(nazwa == null || nazwa.trim().isEmpty())
-            throw new IllegalArgumentException();
         this.nazwa = nazwa;
     }
 
@@ -69,8 +27,6 @@ public class Produkt implements IProdukt{
     }
 
     public void setCena(double cena) {
-        if(cena < 0.0)
-            throw new IllegalArgumentException();
         this.cena = cena;
     }
 
@@ -79,8 +35,45 @@ public class Produkt implements IProdukt{
     }
 
     public void setIloscNaMagazynie(int iloscNaMagazynie) {
-        if(iloscNaMagazynie < 0)
-            throw new IllegalArgumentException();
         this.iloscNaMagazynie = iloscNaMagazynie;
     }
+
+    public void wyswietlInformacje(){
+        System.out.println("Nazwa: "+this.nazwa+", cena: "+this.cena+", ilosc na Magazynie: "+this.iloscNaMagazynie);
+
+    }
+    public void dodajDoMagazynu(int ile){
+        this.iloscNaMagazynie+=ile;
+    }
+    public void usunZMagazynu(int ile){
+        if(this.iloscNaMagazynie < ile){
+            return;
+        }
+        this.iloscNaMagazynie-=ile;
+    }
+    public void odejmij(int ile){
+        this.iloscNaMagazynie-=ile;
+    }
+    public void dodaj(int ile){
+        this.iloscNaMagazynie+=ile;
+    }
+    public String opis(){
+        return "Cześć jestem klasą "+ this.getClass().getSimpleName();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nazwa,cena);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Produkt produkt = (Produkt) o;
+        return Double.compare(produkt.cena, cena) == 0 && Objects.equals(nazwa, produkt.nazwa);
+    }
+
+
 }
+

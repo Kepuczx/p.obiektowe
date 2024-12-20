@@ -1,9 +1,18 @@
-public abstract class Owoc extends ProduktSpozywczy {
-    Owoc(String nazwa, double cena, int iloscNaMagazynie) {
-        super(nazwa, cena, iloscNaMagazynie);
+public class Owoc extends Jadalny{
+    private String nazwa;
+    public Owoc(String nazwa){
+        this.nazwa = nazwa;
     }
-
-    public abstract void smak();
-    public abstract void umyj();
-    public abstract void zjedz();
+    @Override
+    public String smak(){
+        return "Owocowy smak";
+    }
+    @Override
+    public void umyj(){
+        System.out.println("Myje owoc "+nazwa);
+    }
+    @Override
+    public void zjedz(){
+        System.out.println("Jem "+nazwa);
+    }
 }

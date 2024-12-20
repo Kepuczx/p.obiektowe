@@ -1,95 +1,53 @@
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.stream.Collectors;
 
-public class Sklep implements ISklep {
-    private ArrayList<Produkt> produkty;
-    private String nazwaSklepu;
-    private Date dataPowstania;
-    private Magazyn magazynSklepu;
-
-    public Sklep(String nazwaSklepu, Date dataPowstania, Magazyn magazynSklepu)
-    {
-        Date currentDate = new Date();
-        if(dataPowstania.after(currentDate))
-            throw new IllegalArgumentException();
-        this.produkty = new ArrayList<>();
-        this.nazwaSklepu = nazwaSklepu;
-        this.dataPowstania = dataPowstania;
-        this.magazynSklepu = magazynSklepu;
+public class Sklep {
+    private ArrayList<Produkt> listaProdukt;
+    public Sklep() {
+        this.listaProdukt = new ArrayList<>();
     }
-
-    @Override
-    public void dodajProdukt(Produkt p)
-    {
-        if(!produkty.contains(p))
-            produkty.add(p);
+    public void dodajProdukt(Produkt p) {
+        listaProdukt.add(p);
+        System.out.println("Dodano produkt.");
     }
-
-    @Override
-    public String toString()
-    {
-        return produkty.stream().map(Produkt -> Produkt.getNazwa()).collect(Collectors.joining("\n"));
-    }
-
-    @Override
-    public void wyszukajProduktu(String nazwa)
-    {
-        for(Produkt p : produkty){
-            if (nazwa.equalsIgnoreCase(p.getNazwa())) {
-                System.out.println(p);;
-                return;
+    public void wyswietlOferty(){
+        if(listaProdukt.isEmpty()){
+            System.out.println("W sklepie nie ma produktów");
+        }else{
+            System.out.println("Sklep:");
+            for(Produkt p : listaProdukt){
+                p.wyswietlInformacje();
             }
         }
     }
+    public Produkt wyszukajProduktu(String nazwa){
+        for(Produkt p : listaProdukt){
+            if(p.getNazwa().equals(nazwa)){
+                return p;
+            }
+        }
+        System.out.println("Nie ma tego produktu.");
+        return null;
+    }
+    public void dodajProduktu(String nazwa, int ile){
+        Produkt produkt = wyszukajProduktu(nazwa);
+        produkt.dodaj(ile);
 
-    @Override
-    public void zakupy(KoszykZakupowy k, Produkt p, int ilosc)
-    {
-        if (p.getIloscNaMagazynie() >= ilosc)
-            k.dodajProdukt(p, ilosc);
     }
 
-    public ArrayList<Produkt> getProdukty() {
-        return produkty;
-    }
+    public boolean zakupy(KoszykZakupowy koszyk, String nazwaProduktu, int ile){
+        Produkt produkt = wyszukajProduktu(nazwaProduktu);
+        if(produkt == null){
+            System.out.println("Produkt nie istnieje.");
+            return false;
+        }
+        if(produkt.getIloscNaMagazynie() < ile){
+            System.out.println("Nie ma tyle itemow w magazynie.");
+            return false;
+        }
 
-    public void setProdukty(ArrayList<Produkt> produkty) {
-        if(produkty == null)
-            throw new IllegalArgumentException();
-        this.produkty = produkty;
-    }
-
-    public String getNazwaSklepu() {
-        return nazwaSklepu;
-    }
-
-    public void setNazwaSklepu(String nazwaSklepu) {
-        if(nazwaSklepu == null ||nazwaSklepu.trim().isEmpty())
-            throw new IllegalArgumentException();
-        this.nazwaSklepu = nazwaSklepu;
-    }
-
-    public String getDataPowstania() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        return dateFormat.format(dataPowstania);
-    }
-
-    public void setDataPowstania(Date dataPowstania) {
-        Date currentDate = new Date();
-        if(dataPowstania == null || dataPowstania.after(currentDate))
-            throw new IllegalArgumentException();
-        this.dataPowstania = dataPowstania;
-    }
-
-    public Magazyn getMagazynSklepu() {
-        return magazynSklepu;
-    }
-
-    public void setMagazynSklepu(Magazyn magazynSklepu) {
-        if(magazynSklepu == null)
-            throw new IllegalArgumentException();
-        this.magazynSklepu = magazynSklepu;
+        koszyk.dodajProdukt(produkt, ile);
+        produkt.usunZMagazynu(ile);
+        System.out.println("Dodano "+ ile+ " szt. produktu \""+nazwaProduktu);
+        return true;
     }
 }
